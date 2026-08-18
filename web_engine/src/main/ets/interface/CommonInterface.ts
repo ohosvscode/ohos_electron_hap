@@ -65,6 +65,12 @@ export class JSBind {
   bindFunction: (name: string, func: Function) => number;
 }
 
+export interface PowerMonitor {
+  OnSuspend: () => void;
+  OnResume: () => void;
+  OnPowerStateChanged: () => void;
+}
+
 export interface CommandParameter {
   url?: string;
   user_data?: string;
@@ -117,6 +123,7 @@ export interface NativeContext {
   ClearWindowEventFilter: (origin_window_id: number) => void;
   OnCaptionButtonRectChange: (id: string, event: CaptionButtonRect) => void;
   UpdateWindowPcmodeSwitchStatusCB: (value: boolean) => void;
+  PowerMonitor: PowerMonitor;
 }
 
 export interface IParams {
@@ -174,6 +181,31 @@ export interface NotificationAdapterImage {
   width: number;
   height: number;
   buff: ArrayBuffer;
+}
+
+export interface OcrAdapterImage {
+  width: number;
+  height: number;
+  buff: ArrayBuffer;
+}
+
+export interface TextPixelPoint {
+  x: number;
+  y: number;
+}
+
+export interface TextWord {
+  value: string;
+  cornerPoints: Array<TextPixelPoint>;
+}
+
+export interface BatteryInfo {
+  batterySOC: number;
+  chargingStatus: number;
+  isBatteryPresent: boolean;
+  estimatedRemainingChargeTime: number;
+  nowCurrent: number;
+  remainingEnergy: number;
 }
 
 export interface NotificationAdapterButton {
