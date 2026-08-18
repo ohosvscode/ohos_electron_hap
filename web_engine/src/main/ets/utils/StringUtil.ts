@@ -43,4 +43,12 @@ export default class StringUtil {
     });
     return copy;
   }
+
+  static filterFileDocs(doc: string): string {
+    // Resolve Chinese garbled characters
+    let path = decodeURI(doc);
+    // Convert file://docs (and other) URIs to the system path
+    let uri = new fileUri.FileUri(path);
+    return uri.path;
+  }
 }
